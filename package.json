@@ -1,0 +1,29 @@
+{
+  "name": "simple-chatbot",
+  "private": true,
+  "packageManager": "yarn@4.1.1",
+  "workspaces": [
+    "app/backend",
+    "app/frontend"
+  ],
+  "scripts": {
+    "build": "lerna run build",
+    "dev": "lerna run dev",
+    "lint": "lerna run lint",
+    "lint:backend": "lerna run --scope=\"backend\" lint",
+    "lint:frontend": "lerna run lint:frontend",
+    "prepare": "husky || true",
+    "precommit": "lint-staged"
+  },
+  "devDependencies": {
+    "@nx/next": "18.3.3",
+    "lerna": "^8.1.2",
+    "lint-staged": "^15.2.2",
+    "nx": "18.3.3"
+  },
+  "dependencies": {
+    "next": "14.0.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  }
+}
