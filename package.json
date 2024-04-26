@@ -20,10 +20,5 @@
     "lerna": "^8.1.2",
     "lint-staged": "^15.2.2",
     "nx": "18.3.3"
-  },
-  "dependencies": {
-    "next": "14.0.4",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
   }
 }
