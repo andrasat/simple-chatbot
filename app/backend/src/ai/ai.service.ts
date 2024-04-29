@@ -17,6 +17,7 @@ import {
   REQUIREMENT_GENERATOR_SYSTEM_PROMPT,
 } from '../utils/systemPrompts';
 import { CHAT_HISTORY } from '../utils/constants';
+import { ChatInput } from './ai.dto';
 import { CommonMessage, ROLE } from './ai.types';
 
 @Injectable()
@@ -81,9 +82,8 @@ export class AiService {
 
   private _chat = async (
     chatModel: ChatAnthropic,
-    newMessage: string,
+    input: ChatInput,
     sessionId: string,
-    aiAnswer?: string,
   ) => {
     const prompts = ChatPromptTemplate.fromMessages([
       new MessagesPlaceholder(CHAT_HISTORY),
@@ -94,7 +94,7 @@ export class AiService {
     if (this.histories[sessionId]) {
       history = this.histories[sessionId];
 
-      if (aiAnswer) await history.addAIMessage(aiAnswer);
+      if (input.prevAIMessage) await history.addAIMessage(input.prevAIMessage);
     } else {
       history = new InMemoryChatMessageHistory([
         new SystemMessage(REQUIREMENT_GENERATOR_SYSTEM_PROMPT),
@@ -110,7 +110,7 @@ export class AiService {
     });
 
     return chainWithHistory.stream(
-      { input: newMessage },
+      { input: input.userMessage, language: input.language },
       { configurable: { sessionId } },
     );
   };
@@ -134,11 +134,11 @@ export class AiService {
     );
   };
 
-  chatHaiku = (message: string, sessionId: string, aiAnswer?: string) => {
-    return this._chat(this.haiku, message, sessionId, aiAnswer);
+  chatHaiku = (input: ChatInput, sessionId: string) => {
+    return this._chat(this.haiku, input, sessionId);
   };
 
-  chatSonnet = (message: string, sessionId: string, aiAnswer?: string) => {
-    return this._chat(this.sonnet, message, sessionId, aiAnswer);
+  chatSonnet = (input: ChatInput, sessionId: string) => {
+    return this._chat(this.sonnet, input, sessionId);
   };
 }
