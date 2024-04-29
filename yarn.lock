@@ -84,6 +84,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@anthropic-ai/sdk@npm:^0.20.1":
+  version: 0.20.7
+  resolution: "@anthropic-ai/sdk@npm:0.20.7"
+  dependencies:
+    "@types/node": "npm:^18.11.18"
+    "@types/node-fetch": "npm:^2.6.4"
+    abort-controller: "npm:^3.0.0"
+    agentkeepalive: "npm:^4.2.1"
+    form-data-encoder: "npm:1.7.2"
+    formdata-node: "npm:^4.3.2"
+    node-fetch: "npm:^2.6.7"
+    web-streams-polyfill: "npm:^3.2.1"
+  checksum: 10c0/be5068f98efb1daaec3377a4c69f181aab7093769b3e5b298f76abd9150136d761d56a0a5101157eaf73e7d04de4f05e8bb381f1cb6aff4c9ec7098808d1f4cb
+  languageName: node
+  linkType: hard
+
 "@anthropic-ai/sdk@npm:^0.9.1":
   version: 0.9.1
   resolution: "@anthropic-ai/sdk@npm:0.9.1"
@@ -2019,6 +2035,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@langchain/anthropic@npm:^0.1.16":
+  version: 0.1.16
+  resolution: "@langchain/anthropic@npm:0.1.16"
+  dependencies:
+    "@anthropic-ai/sdk": "npm:^0.20.1"
+    "@langchain/core": "npm:~0.1.56"
+    fast-xml-parser: "npm:^4.3.5"
+    zod: "npm:^3.22.4"
+    zod-to-json-schema: "npm:^3.22.4"
+  checksum: 10c0/76897903f4f6ef4f462f75b03ed38af756bc047808fb0eba28a6bb519be0db195662d2209033c9680264e45db26a2e7dee4157b435a2756265158aae1694f2b2
+  languageName: node
+  linkType: hard
+
 "@langchain/community@npm:~0.0.47":
   version: 0.0.52
   resolution: "@langchain/community@npm:0.0.52"
@@ -2313,7 +2342,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@langchain/core@npm:~0.1, @langchain/core@npm:~0.1.56, @langchain/core@npm:~0.1.60":
+"@langchain/core@npm:^0.1.60, @langchain/core@npm:~0.1, @langchain/core@npm:~0.1.56, @langchain/core@npm:~0.1.60":
   version: 0.1.60
   resolution: "@langchain/core@npm:0.1.60"
   dependencies:
@@ -3964,6 +3993,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/express-session@npm:^1.18.0":
+  version: 1.18.0
+  resolution: "@types/express-session@npm:1.18.0"
+  dependencies:
+    "@types/express": "npm:*"
+  checksum: 10c0/a41a1fcc4a433c71e2a7ffbac82bc7fb5ad436757a9d27fd30ae4656dee137d244f04de9ad756b566be136cf82f6a75e9ca55ac6c260396e74d1931021b09621
+  languageName: node
+  linkType: hard
+
 "@types/express@npm:*, @types/express@npm:^4.17.13, @types/express@npm:^4.17.17":
   version: 4.17.21
   resolution: "@types/express@npm:4.17.21"
@@ -4254,6 +4292,13 @@ __metadata:
   version: 9.0.8
   resolution: "@types/uuid@npm:9.0.8"
   checksum: 10c0/b411b93054cb1d4361919579ef3508a1f12bf15b5fdd97337d3d351bece6c921b52b6daeef89b62340fd73fd60da407878432a1af777f40648cbe53a01723489
+  languageName: node
+  linkType: hard
+
+"@types/validator@npm:^13.11.8":
+  version: 13.11.9
+  resolution: "@types/validator@npm:13.11.9"
+  checksum: 10c0/856ebfcfe25d6c91a90235e0eb27302a737832530898195bbfb265da52ae7fe6d68f684942574f8818d3c262cae7a1de99f145dac73fc57217933af1bfc199cb
   languageName: node
   linkType: hard
 
@@ -5441,6 +5486,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "backend@workspace:app/backend"
   dependencies:
+    "@langchain/anthropic": "npm:^0.1.16"
+    "@langchain/core": "npm:^0.1.60"
     "@langchain/openai": "npm:^0.0.28"
     "@nestjs/cli": "npm:^10.0.0"
     "@nestjs/common": "npm:^10.0.0"
@@ -5449,14 +5496,17 @@ __metadata:
     "@nestjs/schematics": "npm:^10.0.0"
     "@nestjs/testing": "npm:^10.0.0"
     "@types/express": "npm:^4.17.17"
+    "@types/express-session": "npm:^1.18.0"
     "@types/jest": "npm:^29.5.2"
     "@types/node": "npm:^20.3.1"
     "@types/supertest": "npm:^6.0.0"
     "@typescript-eslint/eslint-plugin": "npm:^6.0.0"
     "@typescript-eslint/parser": "npm:^6.0.0"
+    class-validator: "npm:^0.14.1"
     eslint: "npm:^8.42.0"
     eslint-config-prettier: "npm:^9.0.0"
     eslint-plugin-prettier: "npm:^5.0.0"
+    express-session: "npm:^1.18.0"
     jest: "npm:^29.5.0"
     langchain: "npm:^0.1.34"
     prettier: "npm:^3.0.0"
@@ -5922,6 +5972,17 @@ __metadata:
   version: 1.2.3
   resolution: "cjs-module-lexer@npm:1.2.3"
   checksum: 10c0/0de9a9c3fad03a46804c0d38e7b712fb282584a9c7ef1ed44cae22fb71d9bb600309d66a9711ac36a596fd03422f5bb03e021e8f369c12a39fa1786ae531baab
+  languageName: node
+  linkType: hard
+
+"class-validator@npm:^0.14.1":
+  version: 0.14.1
+  resolution: "class-validator@npm:0.14.1"
+  dependencies:
+    "@types/validator": "npm:^13.11.8"
+    libphonenumber-js: "npm:^1.10.53"
+    validator: "npm:^13.9.0"
+  checksum: 10c0/946e914e47548b5081449c720ea6a4877bac63dc960e14fca4b990b56e64efe3802d12f07ec22d6420c290245b72ea2d646939239f2a3b597794e6c4c2a4f2ae
   languageName: node
   linkType: hard
 
@@ -6411,6 +6472,13 @@ __metadata:
   version: 1.0.6
   resolution: "cookie-signature@npm:1.0.6"
   checksum: 10c0/b36fd0d4e3fef8456915fcf7742e58fbfcc12a17a018e0eb9501c9d5ef6893b596466f03b0564b81af29ff2538fd0aa4b9d54fe5ccbfb4c90ea50ad29fe2d221
+  languageName: node
+  linkType: hard
+
+"cookie-signature@npm:1.0.7":
+  version: 1.0.7
+  resolution: "cookie-signature@npm:1.0.7"
+  checksum: 10c0/e7731ad2995ae2efeed6435ec1e22cdd21afef29d300c27281438b1eab2bae04ef0d1a203928c0afec2cee72aa36540b8747406ebe308ad23c8e8cc3c26c9c51
   languageName: node
   linkType: hard
 
@@ -6954,7 +7022,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"depd@npm:2.0.0":
+"depd@npm:2.0.0, depd@npm:~2.0.0":
   version: 2.0.0
   resolution: "depd@npm:2.0.0"
   checksum: 10c0/58bd06ec20e19529b06f7ad07ddab60e504d9e0faca4bd23079fac2d279c3594334d736508dc350e06e510aba5e22e4594483b3a6562ce7c17dd797f4cc4ad2c
@@ -7967,6 +8035,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"express-session@npm:^1.18.0":
+  version: 1.18.0
+  resolution: "express-session@npm:1.18.0"
+  dependencies:
+    cookie: "npm:0.6.0"
+    cookie-signature: "npm:1.0.7"
+    debug: "npm:2.6.9"
+    depd: "npm:~2.0.0"
+    on-headers: "npm:~1.0.2"
+    parseurl: "npm:~1.3.3"
+    safe-buffer: "npm:5.2.1"
+    uid-safe: "npm:~2.1.5"
+  checksum: 10c0/5c3f1237f2789cf32f9cd668d3217c228916edfd3b5a686a894a80c7cca63f9ef66bb86a8457074b9b4cc4b2ee97e16781dd4e0cff7829b671ab0db5da0db638
+  languageName: node
+  linkType: hard
+
 "express@npm:4.19.2, express@npm:^4.17.3":
   version: 4.19.2
   resolution: "express@npm:4.19.2"
@@ -8075,6 +8159,17 @@ __metadata:
   version: 2.1.1
   resolution: "fast-safe-stringify@npm:2.1.1"
   checksum: 10c0/d90ec1c963394919828872f21edaa3ad6f1dddd288d2bd4e977027afff09f5db40f94e39536d4646f7e01761d704d72d51dce5af1b93717f3489ef808f5f4e4d
+  languageName: node
+  linkType: hard
+
+"fast-xml-parser@npm:^4.3.5":
+  version: 4.3.6
+  resolution: "fast-xml-parser@npm:4.3.6"
+  dependencies:
+    strnum: "npm:^1.0.5"
+  bin:
+    fxparser: src/cli/cli.js
+  checksum: 10c0/9ebe2ac142c6978cae423c39c2a9b561edb76be584317d578768ed4a006a61fc0e83abf8c6fe31029139c4ad15ea1f2e7b6720ba9e6eda0e5266d7f2770fb079
   languageName: node
   linkType: hard
 
@@ -11135,6 +11230,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"libphonenumber-js@npm:^1.10.53":
+  version: 1.10.61
+  resolution: "libphonenumber-js@npm:1.10.61"
+  checksum: 10c0/0c920293b2845d0c1a613fcc9d9f7259c6d157c58fd820766471c48e64f7300205ece75fab32f8770f5e68d992512ff91793e3c600f98ffbce4a3905b6af4924
+  languageName: node
+  linkType: hard
+
 "license-webpack-plugin@npm:^4.0.2":
   version: 4.0.2
   resolution: "license-webpack-plugin@npm:4.0.2"
@@ -14034,6 +14136,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"random-bytes@npm:~1.0.0":
+  version: 1.0.0
+  resolution: "random-bytes@npm:1.0.0"
+  checksum: 10c0/71e7a600e0976e9ebc269793a0577d47b965fa678fcc9e9623e427f909d1b3669db5b3a178dbf61229f0724ea23dba64db389f0be0ba675c6a6b837c02f29b8f
+  languageName: node
+  linkType: hard
+
 "randombytes@npm:^2.1.0":
   version: 2.1.0
   resolution: "randombytes@npm:2.1.0"
@@ -15468,6 +15577,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"strnum@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "strnum@npm:1.0.5"
+  checksum: 10c0/64fb8cc2effbd585a6821faa73ad97d4b553c8927e49086a162ffd2cc818787643390b89d567460a8e74300148d11ac052e21c921ef2049f2987f4b1b89a7ff1
+  languageName: node
+  linkType: hard
+
 "strong-log-transformer@npm:2.1.0, strong-log-transformer@npm:^2.1.0":
   version: 2.1.0
   resolution: "strong-log-transformer@npm:2.1.0"
@@ -16325,6 +16441,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"uid-safe@npm:~2.1.5":
+  version: 2.1.5
+  resolution: "uid-safe@npm:2.1.5"
+  dependencies:
+    random-bytes: "npm:~1.0.0"
+  checksum: 10c0/ec96862e859fd12175f3da7fda9d1359a2cf412fd521e10837cbdc6d554774079ce252f366981df9401283841c8924782f6dbee8f82a3a81f805ed8a8584595d
+  languageName: node
+  linkType: hard
+
 "uid@npm:2.0.2":
   version: 2.0.2
   resolution: "uid@npm:2.0.2"
@@ -16544,6 +16669,13 @@ __metadata:
   dependencies:
     builtins: "npm:^1.0.3"
   checksum: 10c0/064f21f59aefae6cc286dd4a50b15d14adb0227e0facab4316197dfb8d06801669e997af5081966c15f7828a5e6ff1957bd20886aeb6b9d0fa430e4cb5db9c4a
+  languageName: node
+  linkType: hard
+
+"validator@npm:^13.9.0":
+  version: 13.11.0
+  resolution: "validator@npm:13.11.0"
+  checksum: 10c0/0107da3add5a4ebc6391dac103c55f6d8ed055bbcc29a4c9cbf89eacfc39ba102a5618c470bdc33c6487d30847771a892134a8c791f06ef0962dd4b7a60ae0f5
   languageName: node
   linkType: hard
 
@@ -17166,7 +17298,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod-to-json-schema@npm:^3.22.3, zod-to-json-schema@npm:^3.22.5":
+"zod-to-json-schema@npm:^3.22.3, zod-to-json-schema@npm:^3.22.4, zod-to-json-schema@npm:^3.22.5":
   version: 3.23.0
   resolution: "zod-to-json-schema@npm:3.23.0"
   peerDependencies:

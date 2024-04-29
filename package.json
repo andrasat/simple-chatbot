@@ -9,9 +9,11 @@
   "scripts": {
     "build": "lerna run build",
     "dev": "lerna run dev",
+    "dev:backend": "lerna run --scope=\"backend\" dev",
     "lint": "lerna run lint",
     "lint:backend": "lerna run --scope=\"backend\" lint",
     "lint:frontend": "lerna run lint:frontend",
+    "test": "lerna run --scope=\"backend\" test",
     "prepare": "husky || true",
     "precommit": "lint-staged"
   },

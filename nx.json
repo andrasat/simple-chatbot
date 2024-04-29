@@ -16,8 +16,11 @@
       ],
       "cache": true
     },
+    "dev": {
+      "cache": false
+    },
     "test": {
-      "cache": true
+      "cache": false
     }
   },
   "defaultBase": "main",
