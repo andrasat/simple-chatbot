@@ -11,7 +11,7 @@ async function bootstrap() {
   app.use(
     Session({
       name: 'estimate.sid',
-      secret: 'secret',
+      secret: process.env.SECRET,
       resave: false,
       saveUninitialized: true,
       cookie: {
@@ -22,6 +22,6 @@ async function bootstrap() {
     }),
   );
 
-  await app.listen(3001);
+  await app.listen(process.env.PORT || 3001);
 }
 bootstrap();
