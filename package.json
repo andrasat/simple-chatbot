@@ -10,6 +10,7 @@
     "build": "lerna run build",
     "dev": "lerna run dev",
     "dev:backend": "lerna run --scope=\"backend\" dev",
+    "start": "lerna run start:prod",
     "lint": "lerna run lint",
     "lint:backend": "lerna run --scope=\"backend\" lint",
     "lint:frontend": "lerna run lint:frontend",
