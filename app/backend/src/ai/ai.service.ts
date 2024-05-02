@@ -83,6 +83,7 @@ export class AiService {
   private _chat = async (
     chatModel: ChatAnthropic,
     input: ChatInput,
+    language: string,
     sessionId: string,
   ) => {
     const prompts = ChatPromptTemplate.fromMessages([
@@ -110,12 +111,12 @@ export class AiService {
     });
 
     return chainWithHistory.stream(
-      { input: input.userMessage, language: input.language },
+      { input: input.userMessage, language },
       { configurable: { sessionId } },
     );
   };
 
-  initiate = (language: string = 'en-US', sessionId: string) => {
+  initiate = (language: string = 'en', sessionId: string) => {
     return this._initiateChat(
       this.haiku,
       [
@@ -134,11 +135,11 @@ export class AiService {
     );
   };
 
-  chatHaiku = (input: ChatInput, sessionId: string) => {
-    return this._chat(this.haiku, input, sessionId);
+  chatHaiku = (input: ChatInput, language: string, sessionId: string) => {
+    return this._chat(this.haiku, input, language, sessionId);
   };
 
-  chatSonnet = (input: ChatInput, sessionId: string) => {
-    return this._chat(this.sonnet, input, sessionId);
+  chatSonnet = (input: ChatInput, language: string, sessionId: string) => {
+    return this._chat(this.sonnet, input, language, sessionId);
   };
 }

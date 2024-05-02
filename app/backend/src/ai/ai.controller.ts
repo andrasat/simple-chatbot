@@ -33,11 +33,12 @@ export class AiController {
 
   @Post('/haiku')
   async getHaiku(
-    @Body('input') input: ChatInput,
+    @Headers('accept-language') language: string,
+    @Body() input: ChatInput,
     @Session() session: Record<string, any>,
     @Res() res: Response,
   ) {
-    const stream = await this.aiService.chatHaiku(input, session.id);
+    const stream = await this.aiService.chatHaiku(input, language, session.id);
 
     for await (const chunk of stream) {
       res.write(chunk.content);
@@ -48,11 +49,12 @@ export class AiController {
 
   @Post('/sonnet')
   async getSonnet(
-    @Body('input') input: ChatInput,
+    @Headers('accept-language') language: string,
+    @Body() input: ChatInput,
     @Session() session: Record<string, any>,
     @Res() res: Response,
   ) {
-    const stream = await this.aiService.chatSonnet(input, session.id);
+    const stream = await this.aiService.chatSonnet(input, language, session.id);
 
     for await (const chunk of stream) {
       res.write(chunk.content);

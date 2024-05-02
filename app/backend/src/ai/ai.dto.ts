@@ -3,11 +3,8 @@ import { IsNotEmpty, IsString } from 'class-validator';
 export class ChatInput {
   @IsNotEmpty()
   @IsString()
-  userMessage: string;
+  readonly userMessage: string;
 
   @IsString()
-  prevAIMessage?: string;
-
-  @IsString()
-  language?: string;
+  readonly prevAIMessage?: string;
 }

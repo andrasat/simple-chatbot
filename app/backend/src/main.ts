@@ -6,18 +6,23 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.enableCors({
+    origin: true,
+    credentials: true,
+  });
+
   app.useGlobalPipes(new ValidationPipe());
 
   app.use(
     Session({
-      name: 'estimate.sid',
+      name: 'chatbot.estimate.sid',
       secret: process.env.SECRET,
       resave: false,
       saveUninitialized: true,
       cookie: {
-        maxAge: 60000, // 10 minutes
-        httpOnly: true,
-        secure: false,
+        maxAge: 1000 * 60 * 60 * 24, // 24 hours
+        httpOnly: false,
+        secure: process.env.NODE_ENV === 'production',
       },
     }),
   );

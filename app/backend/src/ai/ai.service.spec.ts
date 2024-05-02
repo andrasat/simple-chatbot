@@ -30,12 +30,20 @@ describe('AiService', () => {
   });
 
   it('Haiku stream should be defined', async () => {
-    const haiku = await service.chatHaiku(_testMessage.message, '1');
+    const haiku = await service.chatHaiku(
+      { userMessage: _testMessage.message },
+      'en',
+      '1',
+    );
     expect(haiku).toBeDefined();
   });
 
   it('Sonnet stream should be defined', async () => {
-    const sonnet = await service.chatSonnet(_testMessage.message, '2');
+    const sonnet = await service.chatSonnet(
+      { userMessage: _testMessage.message },
+      'en',
+      '2',
+    );
     expect(sonnet).toBeDefined();
   });
 });
