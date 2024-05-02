@@ -10,10 +10,11 @@
     "build": "lerna run build",
     "dev": "lerna run dev",
     "dev:backend": "lerna run --scope=\"backend\" dev",
+    "dev:frontend": "lerna run --scope=\"frontend\" dev",
     "start": "lerna run start:prod",
     "lint": "lerna run lint",
     "lint:backend": "lerna run --scope=\"backend\" lint",
-    "lint:frontend": "lerna run lint:frontend",
+    "lint:frontend": "lerna run --scope=\"frontend\" lint",
     "test": "lerna run --scope=\"backend\" test",
     "prepare": "husky || true",
     "precommit": "lint-staged"
