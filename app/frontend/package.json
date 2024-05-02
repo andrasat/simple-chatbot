@@ -6,14 +6,20 @@
     "dev": "next dev",
     "build": "next build",
     "start:prod": "next start",
-    "lint": "next lint"
+    "lint": "next lint --fix"
   },
   "dependencies": {
+    "@formatjs/intl-localematcher": "^0.5.4",
+    "clsx": "^2.1.1",
+    "dompurify": "^3.1.2",
+    "negotiator": "^0.6.3",
     "next": "14.2.2",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@types/dompurify": "^3.0.5",
+    "@types/negotiator": "^0.6.3",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
