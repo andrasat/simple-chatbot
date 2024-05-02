@@ -22,7 +22,7 @@ async function bootstrap() {
       cookie: {
         maxAge: 1000 * 60 * 60 * 24, // 24 hours
         httpOnly: false,
-        secure: false, // this because we are using private networking
+        secure: process.env.NODE_ENV === 'production',
       },
     }),
   );
