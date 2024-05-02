@@ -14,7 +14,7 @@ export default async function ChatbotPage({ params }: Props) {
   return (
     <PageContainer className={clsx('relative')}>
       <h1 className={clsx('font-bold', 'fixed', 'top-0', 'pt-3')}>
-        {dictionary.text['title']}
+        {dictionary.text['title']} (Claude 3 Haiku)
       </h1>
 
       <ChatModule dictionary={dictionary} locale={params.locale} />
