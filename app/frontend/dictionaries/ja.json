@@ -1,0 +1,13 @@
+{
+  "text": {
+    "title": "AI アシスタント",
+    "enter": "入力",
+    "you": "あなた"
+  },
+  "error": {
+    "input-message-empty": "メッセージを入力してください"
+  },
+  "placeholder": {
+    "input-message": "メッセージを入力してください"
+  }
+}

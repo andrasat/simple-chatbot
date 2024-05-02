@@ -1,0 +1,13 @@
+{
+  "text": {
+    "title": "AI Assistant",
+    "enter": "Enter",
+    "you": "You"
+  },
+  "error": {
+    "input-message-empty": "Please enter a message"
+  },
+  "placeholder": {
+    "input-message": "Type your message..."
+  }
+}

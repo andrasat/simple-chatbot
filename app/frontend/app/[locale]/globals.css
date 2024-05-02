@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --bg-rgb: 0, 0, 0;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--bg-rgb));
+}
+
+div#toast-portal {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  z-index: 9999;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
