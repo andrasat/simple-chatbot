@@ -42,7 +42,7 @@ const TextInput: React.FC<TextInputProps> = ({
         'focus:outline-none',
         'focus:ring-2',
         'focus:ring-blue-500',
-        disable ? 'bg-gray-100' : 'bg-white',
+        disable ? 'bg-gray-200' : 'bg-white',
         noto.className,
         className,
       )}

@@ -22,12 +22,18 @@ type Props = {
 function AIMessage({ aiMessage, name }: { aiMessage: string; name: string }) {
   const sanitizedInnerHTML = { __html: DOMPurify.sanitize(aiMessage) };
   return (
-    <p className={clsx('flex', 'my-2', noto.className)}>
+    <p className={clsx('flex', 'my-3', noto.className)}>
       <span className={clsx('font-semibold', 'flex-[0_0_40px]', 'pr-2')}>
         {name}:
       </span>
       <span
-        className="font-light"
+        className={clsx(
+          'bg-slate-800',
+          'font-light',
+          'tracking-wide',
+          'p-2',
+          'rounded-md',
+        )}
         dangerouslySetInnerHTML={sanitizedInnerHTML}
       ></span>
     </p>
@@ -162,7 +168,7 @@ function Chat({ locale, dictionary }: Props) {
     >
       <div
         ref={conversationRef}
-        className={clsx('flex-auto', 'overflow-y-auto', 'mb-4')}
+        className={clsx('flex-auto', 'overflow-y-auto', 'mb-4', 'px-2')}
       >
         {conversation.map((msg, index) => {
           switch (msg.role) {
