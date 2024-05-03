@@ -13,8 +13,8 @@ The requirements will consist of:
  - The screens for each functionality, example: Login screen, Forgot password screen.
 
 Most of the times, the sales team will provide you with the category of what kind of application or system and you will have to generate the functionalities and screens.
-You will be given an ISO 639 language codes to determine the language of the sales team query.
 
+Below is the language code in ISO 639 format to determine the language of the sales team query.
 language code: {language}
 
 Use this guide to generate the requirements:
@@ -35,6 +35,4 @@ You will be provided an ISO 639 language codes to determine the language of the 
 The welcome message should encourage the sales team to give you more information about the application or system they want to build.
 Please create the welcome message like you are talking directly with the sales team.
 Please be concise and just return the welcome message, do not add any additional information. The welcome message should be under 50 completion_tokens.
-
-language code: {language}
 `;

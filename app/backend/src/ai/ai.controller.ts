@@ -47,19 +47,19 @@ export class AiController {
     res.end();
   }
 
-  @Post('/sonnet')
-  async getSonnet(
-    @Headers('accept-language') language: string,
-    @Body() input: ChatInput,
-    @Session() session: Record<string, any>,
-    @Res() res: Response,
-  ) {
-    const stream = await this.aiService.chatSonnet(input, language, session.id);
+  // @Post('/sonnet')
+  // async getSonnet(
+  //   @Headers('accept-language') language: string,
+  //   @Body() input: ChatInput,
+  //   @Session() session: Record<string, any>,
+  //   @Res() res: Response,
+  // ) {
+  //   const stream = await this.aiService.chatSonnet(input, language, session.id);
 
-    for await (const chunk of stream) {
-      res.write(chunk.content);
-    }
+  //   for await (const chunk of stream) {
+  //     res.write(chunk.content);
+  //   }
 
-    res.end();
-  }
+  //   res.end();
+  // }
 }

@@ -123,12 +123,13 @@ export class AiService {
         {
           role: ROLE.SYSTEM,
           message: WELCOME_SYSTEM_MESSAGE,
-          args: { language },
+          args: {},
         },
         {
           role: ROLE.USER,
-          message: 'Please generate a welcome message.',
-          args: {},
+          message:
+            'Please generate a welcome message with this language code: {language}.',
+          args: { language },
         },
       ],
       sessionId,
