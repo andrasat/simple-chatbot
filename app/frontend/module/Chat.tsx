@@ -205,7 +205,9 @@ function Chat({ locale, dictionary }: Props) {
           {dictionary.text['enter']}
         </SubmitButton>
       </form>
-      {error && <div className={clsx('text-red-500', 'text-sm')}>{error}</div>}
+      {error && (
+        <div className={clsx('text-red-500', 'text-sm', 'py-2')}>{error}</div>
+      )}
     </div>
   );
 }
