@@ -65,8 +65,10 @@ function Chat({ locale, dictionary }: Props) {
   const [error, setError] = useState('');
   const [disableInput, setDisableInput] = useState(false);
   const [conversation, setConversation] = useState<Message[]>([]);
+
   const buttonRef = useRef<HTMLButtonElement>(null);
   const conversationRef = useRef<HTMLDivElement>(null);
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     async function fetchWelcomeMessage() {
@@ -116,6 +118,8 @@ function Chat({ locale, dictionary }: Props) {
       },
     ]);
 
+    textAreaRef.current!.value = '';
+
     const chunks = chatAI({ userMessage, prevAIMessage }, locale);
     setDisableInput(true);
 
@@ -145,11 +149,7 @@ function Chat({ locale, dictionary }: Props) {
   }
 
   const inputOnKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && !e.ctrlKey) {
-      e.preventDefault();
-      e.currentTarget.value += '\n';
-    }
-    if (e.key === 'Enter' && e.ctrlKey) {
+    if (e.key === 'Enter') {
       e.preventDefault();
       buttonRef.current?.click();
     }
@@ -189,6 +189,7 @@ function Chat({ locale, dictionary }: Props) {
       </div>
       <form onSubmit={handleSubmit} className={clsx('flex', 'flex-shrink')}>
         <TextAreaInput
+          ref={textAreaRef}
           name="userMessage"
           placeholder={dictionary.placeholder['input-message']}
           disable={disableInput}

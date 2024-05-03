@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, forwardRef } from 'react';
 import { noto } from '@lib/fonts';
 import clsx from 'clsx';
 
@@ -12,42 +12,50 @@ interface TextInputProps {
   disable?: boolean;
 }
 
-const TextInput: React.FC<TextInputProps> = ({
-  name,
-  defaultValue,
-  onChange = () => {},
-  onKeyDown = () => {},
-  placeholder = '',
-  className = '',
-  disable = false,
-}) => {
-  return (
-    <textarea
-      cols={30}
-      rows={2}
-      name={name}
-      value={defaultValue}
-      onChange={onChange}
-      onKeyDown={onKeyDown}
-      placeholder={placeholder}
-      disabled={disable}
-      className={clsx(
-        'text-gray-900',
-        'font-light',
-        'px-4',
-        'py-2',
-        'rounded-l-lg',
-        'border',
-        'border-gray-300',
-        'focus:outline-none',
-        'focus:ring-2',
-        'focus:ring-blue-500',
-        disable ? 'bg-gray-200' : 'bg-white',
-        noto.className,
-        className,
-      )}
-    />
-  );
-};
+const TextAreaInput = forwardRef<HTMLTextAreaElement, TextInputProps>(
+  (
+    {
+      name,
+      defaultValue,
+      onChange = () => {},
+      onKeyDown = () => {},
+      placeholder = '',
+      className = '',
+      disable = false,
+    },
+    ref,
+  ) => {
+    return (
+      <textarea
+        cols={30}
+        rows={2}
+        name={name}
+        value={defaultValue}
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+        placeholder={placeholder}
+        disabled={disable}
+        className={clsx(
+          'text-gray-900',
+          'font-light',
+          'px-4',
+          'py-2',
+          'rounded-l-lg',
+          'border',
+          'border-gray-300',
+          'focus:outline-none',
+          'focus:ring-2',
+          'focus:ring-blue-500',
+          disable ? 'bg-gray-200' : 'bg-white',
+          noto.className,
+          className,
+        )}
+        ref={ref}
+      />
+    );
+  },
+);
 
-export default TextInput;
+TextAreaInput.displayName = 'TextAreaInput';
+
+export default TextAreaInput;
