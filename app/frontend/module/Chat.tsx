@@ -23,7 +23,7 @@ function AIMessage({ aiMessage, name }: { aiMessage: string; name: string }) {
   const sanitizedInnerHTML = { __html: DOMPurify.sanitize(aiMessage) };
   return (
     <p className={clsx('flex', 'my-3', noto.className)}>
-      <span className={clsx('font-semibold', 'flex-[0_0_40px]', 'pr-2')}>
+      <span className={clsx('font-semibold', 'flex-[0_0_65px]', 'pr-2')}>
         {name}:
       </span>
       <span
@@ -50,7 +50,7 @@ function UserMessage({
   const sanitizedInnerHTML = { __html: DOMPurify.sanitize(userMessage) };
   return (
     <p className={clsx('flex', 'my-2', noto.className)}>
-      <span className={clsx('font-semibold', 'flex-[0_0_40px]', 'pr-2')}>
+      <span className={clsx('font-semibold', 'flex-[0_0_65px]', 'pr-2')}>
         {name}:
       </span>
       <span
