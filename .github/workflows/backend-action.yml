@@ -46,4 +46,5 @@ jobs:
       - name: Deploy
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-        run: railway up -d -s chatbot-backend ./app/backend
+          RAILWAY_BACKEND_SERVICE_ID: ${{ secrets.RAILWAY_BACKEND_SERVICE_ID }}
+        run: railway up -d -s $RAILWAY_BACKEND_SERVICE_ID ./app/backend

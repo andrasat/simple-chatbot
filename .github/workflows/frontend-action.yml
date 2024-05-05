@@ -42,4 +42,5 @@ jobs:
       - name: Deploy
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-        run: railway up -d -s chatbot-frontend ./app/frontend
+          RAILWAY_FRONTEND_SERVICE_ID: ${{ secrets.RAILWAY_FRONTEND_SERVICE_ID }}
+        run: railway up -d -s $RAILWAY_FRONTEND_SERVICE_ID ./app/frontend
