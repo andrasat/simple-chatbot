@@ -1,7 +1,10 @@
 {
   "name": "frontend",
   "version": "0.1.0",
+  "description": "Chatbot Frontend",
+  "author": "@andrasat",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
