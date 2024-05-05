@@ -1,4 +1,4 @@
-name: Deploy Backend to Railway
+name: Backend Action
 on:
   push:
     branches: [main]
