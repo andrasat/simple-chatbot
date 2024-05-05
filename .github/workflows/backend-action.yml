@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - "app/backend/**"
+      - ".github/workflows/backend-action.yml"
 jobs:
   ci:
     runs-on: ubuntu-latest
