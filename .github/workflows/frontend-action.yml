@@ -39,4 +39,4 @@ jobs:
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
           RAILWAY_FRONTEND_SERVICE_ID: ${{ secrets.RAILWAY_FRONTEND_SERVICE_ID }}
-        run: railway up -d -s $RAILWAY_FRONTEND_SERVICE_ID ./app/frontend
+        run: railway up -d -s $RAILWAY_FRONTEND_SERVICE_ID app/frontend/
