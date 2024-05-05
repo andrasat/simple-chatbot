@@ -1,78 +1,22 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
 import clsx from 'clsx';
-import DOMPurify from 'dompurify';
 
 import TextAreaInput from '@components/TextAreaInput';
 import SubmitButton from '@components/SubmitButton';
+import ConversationBlock from '@components/ConversationBlock';
 
-import { noto } from '@lib/fonts';
 import { getWelcomeMsgStream, chatAI } from '@lib/api';
 import { Message } from '@lib/types';
 
 type Props = {
   locale: string;
   dictionary: {
-    text: { title: string; enter: string; you: string };
+    text: { title: string; enter: string; user: string; assistant: string };
     error: { 'input-message-empty': string };
     placeholder: { 'input-message': string };
   };
 };
-
-function AIMessage({ aiMessage, name }: { aiMessage: string; name: string }) {
-  const sanitizedInnerHTML = { __html: DOMPurify.sanitize(aiMessage) };
-  return (
-    <p className={clsx('flex', 'my-4', noto.className)}>
-      <span className={clsx('font-semibold', 'flex-[0_0_30px]', 'pr-2')}>
-        {name}
-      </span>
-      <span
-        className={clsx(
-          'bg-slate-800',
-          'font-light',
-          'tracking-wide',
-          'p-2',
-          'rounded-md',
-        )}
-        dangerouslySetInnerHTML={sanitizedInnerHTML}
-      ></span>
-    </p>
-  );
-}
-
-function UserMessage({
-  userMessage,
-  name,
-}: {
-  userMessage: string;
-  name: string;
-}) {
-  const sanitizedInnerHTML = { __html: DOMPurify.sanitize(userMessage) };
-  return (
-    <p className={clsx('flex', 'justify-self-end', 'my-4', noto.className)}>
-      <span
-        className={clsx(
-          'bg-slate-500',
-          'font-light',
-          'tracking-wide',
-          'p-2',
-          'rounded-md',
-        )}
-        dangerouslySetInnerHTML={sanitizedInnerHTML}
-      ></span>
-      <span
-        className={clsx(
-          'font-semibold',
-          'flex-[0_0_auto]',
-          'pl-2',
-          'text-right',
-        )}
-      >
-        {name}
-      </span>
-    </p>
-  );
-}
 
 function Chat({ locale, dictionary }: Props) {
   const [error, setError] = useState('');
@@ -186,22 +130,13 @@ function Chat({ locale, dictionary }: Props) {
         ref={conversationRef}
         className={clsx('flex-auto', 'overflow-y-auto', 'mb-4', 'px-2')}
       >
-        {conversation.map((msg, index) => {
-          switch (msg.role) {
-            case 'assistant':
-              return (
-                <AIMessage key={index} aiMessage={msg.content} name="AI" />
-              );
-            case 'user':
-              return (
-                <UserMessage
-                  key={index}
-                  userMessage={msg.content}
-                  name={dictionary.text['you']}
-                />
-              );
-          }
-        })}
+        {conversation.map((msg, index) => (
+          <ConversationBlock
+            key={index}
+            message={msg}
+            name={dictionary.text[msg.role]}
+          />
+        ))}
       </div>
       <form onSubmit={handleSubmit} className={clsx('flex', 'flex-shrink')}>
         <TextAreaInput

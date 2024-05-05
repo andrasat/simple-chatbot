@@ -1,9 +1,6 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+import { ChatInput } from './types';
 
-type ChatInput = {
-  userMessage: string;
-  prevAIMessage?: string;
-};
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
 
 export async function* getWelcomeMsgStream(locale: string) {
   const response = await fetch(`${API_URL}/ai/welcome`, {

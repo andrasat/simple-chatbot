@@ -2,7 +2,8 @@
   "text": {
     "title": "AI アシスタント",
     "enter": "入力",
-    "you": "あなた"
+    "user": "あなた",
+    "assistant": "AI"
   },
   "error": {
     "input-message-empty": "メッセージを入力してください"
