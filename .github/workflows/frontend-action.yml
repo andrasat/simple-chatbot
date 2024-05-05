@@ -10,12 +10,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Enable Corepack
-        run: corepack enable
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
+          cache: yarn
+      - name: Enable Corepack
+        run: corepack enable
       - name: Install dependencies
         run: yarn install --immutable
       - name: Cache dependencies
@@ -38,11 +39,7 @@ jobs:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
           PROJECT_ID: ${{ secrets.RAILWAY_PROJECT_ID }}
         run: railway link $PROJECT_ID
-      - name: Set Railway Service
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-        run: railway service chatbot-frontend
       - name: Deploy
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-        run: railway up ./app/frontend
+        run: railway up -d -s chatbot-frontend ./app/frontend
