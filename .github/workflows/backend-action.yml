@@ -39,11 +39,6 @@ jobs:
     steps:
       - name: Install Railway
         run: npm i -g @railway/cli
-      - name: Link Railway Project
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-          PROJECT_ID: ${{ secrets.RAILWAY_PROJECT_ID }}
-        run: railway link --environment production $PROJECT_ID
       - name: Deploy
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
