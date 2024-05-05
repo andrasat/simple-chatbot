@@ -22,9 +22,9 @@ type Props = {
 function AIMessage({ aiMessage, name }: { aiMessage: string; name: string }) {
   const sanitizedInnerHTML = { __html: DOMPurify.sanitize(aiMessage) };
   return (
-    <p className={clsx('flex', 'my-3', noto.className)}>
-      <span className={clsx('font-semibold', 'flex-[0_0_65px]', 'pr-2')}>
-        {name}:
+    <p className={clsx('flex', 'my-4', noto.className)}>
+      <span className={clsx('font-semibold', 'flex-[0_0_30px]', 'pr-2')}>
+        {name}
       </span>
       <span
         className={clsx(
@@ -49,14 +49,27 @@ function UserMessage({
 }) {
   const sanitizedInnerHTML = { __html: DOMPurify.sanitize(userMessage) };
   return (
-    <p className={clsx('flex', 'my-2', noto.className)}>
-      <span className={clsx('font-semibold', 'flex-[0_0_65px]', 'pr-2')}>
-        {name}:
-      </span>
+    <p className={clsx('flex', 'justify-self-end', 'my-4', noto.className)}>
       <span
-        className="font-light"
+        className={clsx(
+          'bg-slate-500',
+          'font-light',
+          'tracking-wide',
+          'p-2',
+          'rounded-md',
+        )}
         dangerouslySetInnerHTML={sanitizedInnerHTML}
       ></span>
+      <span
+        className={clsx(
+          'font-semibold',
+          'flex-[0_0_auto]',
+          'pl-2',
+          'text-right',
+        )}
+      >
+        {name}
+      </span>
     </p>
   );
 }
@@ -66,6 +79,7 @@ function Chat({ locale, dictionary }: Props) {
   const [disableInput, setDisableInput] = useState(false);
   const [conversation, setConversation] = useState<Message[]>([]);
 
+  const didInit = useRef(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const conversationRef = useRef<HTMLDivElement>(null);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -89,10 +103,11 @@ function Chat({ locale, dictionary }: Props) {
       setDisableInput(false);
     }
 
-    if (conversation.length === 0) {
+    if (!didInit.current) {
+      didInit.current = true;
       fetchWelcomeMessage();
     }
-  }, [locale, conversation.length]);
+  }, [locale]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -149,6 +164,7 @@ function Chat({ locale, dictionary }: Props) {
   }
 
   const inputOnKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    // overwrite enter behaviour in text area
     if (e.key === 'Enter') {
       e.preventDefault();
       buttonRef.current?.click();
