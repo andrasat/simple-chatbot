@@ -38,7 +38,7 @@ jobs:
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
           PROJECT_ID: ${{ secrets.RAILWAY_PROJECT_ID }}
-        run: railway link $PROJECT_ID
+        run: railway link --environment production $PROJECT_ID
       - name: Deploy
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
