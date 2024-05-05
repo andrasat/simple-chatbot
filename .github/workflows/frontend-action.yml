@@ -29,14 +29,3 @@ jobs:
           restore-keys: ${{ runner.os }}-yarn
       - name: Lint
         run: yarn lint:frontend
-  deploy:
-    needs: ci
-    runs-on: ubuntu-latest
-    steps:
-      - name: Install Railway
-        run: npm i -g @railway/cli
-      - name: Deploy
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-          RAILWAY_FRONTEND_SERVICE_ID: ${{ secrets.RAILWAY_FRONTEND_SERVICE_ID }}
-        run: railway up -d -s $RAILWAY_FRONTEND_SERVICE_ID app/frontend/
