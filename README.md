@@ -29,3 +29,7 @@ $ yarn install
 ```bash
 $ yarn dev
 ```
+
+### Notes
+
+- Railway deployment can automatically triggered when github action workflow succeed. Setup enable check suites in your each railway service
