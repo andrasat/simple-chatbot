@@ -10,12 +10,12 @@ type Props = {
   name: string;
 };
 
-function ConversationBlock({ message, name }: Props) {
+function MessageBlock({ message, name }: Props) {
   const sanitizedInnerHTML = { __html: DOMPurify.sanitize(message.content) };
   switch (message.role) {
     case 'user':
       return (
-        <p className={clsx('flex', 'justify-self-end', 'my-4', noto.className)}>
+        <p className={clsx('flex', 'self-end', 'my-4', noto.className)}>
           <span
             className={clsx(
               'bg-slate-500',
@@ -59,4 +59,4 @@ function ConversationBlock({ message, name }: Props) {
   }
 }
 
-export default ConversationBlock;
+export default MessageBlock;

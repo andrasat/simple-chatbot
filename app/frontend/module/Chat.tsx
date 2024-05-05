@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 import TextAreaInput from '@components/TextAreaInput';
 import SubmitButton from '@components/SubmitButton';
-import ConversationBlock from '@components/ConversationBlock';
+import MessageBlock from '@components/MessageBlock';
 
 import { getWelcomeMsgStream, chatAI } from '@lib/api';
 import { Message } from '@lib/types';
@@ -128,10 +128,17 @@ function Chat({ locale, dictionary }: Props) {
     >
       <div
         ref={conversationRef}
-        className={clsx('flex-auto', 'overflow-y-auto', 'mb-4', 'px-2')}
+        className={clsx(
+          'flex',
+          'flex-col',
+          'flex-auto',
+          'overflow-y-auto',
+          'mb-4',
+          'px-2',
+        )}
       >
         {conversation.map((msg, index) => (
-          <ConversationBlock
+          <MessageBlock
             key={index}
             message={msg}
             name={dictionary.text[msg.role]}
