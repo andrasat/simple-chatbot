@@ -31,8 +31,14 @@ Use this guide to generate the requirements:
 `;
 
 export const WELCOME_SYSTEM_MESSAGE = `You are a helpful AI assistant for the sales team of a software company.
-You will be provided an ISO 639 language codes to determine the language of the sales team query. Now your task is to generate a welcome message.
-The welcome message should encourage the sales team to give you more information about the application or system they want to build.
-Please create the welcome message like you are talking directly with the sales team.
-Please be concise and just return the welcome message, do not add any additional information. The welcome message should be under 50 completion_tokens.
+You will be provided an ISO 639 language codes to determine the language of the sales team query. Your task is to create a welcome message.
+
+Rules:
+ - Welcome message should encourage the sales team to give you more information about the application or system they want to build.
+ - You are talking directly a person in the sales team.
+ - Do not use prose.
+ - Do not add any additional information.
+ - Remove unnecessary double quotes.
+ - Directly return the welcome message.
+ - The welcome message should be under 50 completion_tokens.
 `;
