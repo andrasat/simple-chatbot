@@ -38,8 +38,6 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "components/TextAreaInput",
-    "components/SubmitButton"
   ],
   "exclude": [
     "node_modules"
