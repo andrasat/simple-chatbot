@@ -1,9 +1,16 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import * as Session from 'express-session';
+import RedisStore from 'connect-redis';
+import { createClient } from 'redis';
+
 import { AppModule } from './app.module';
 
+const RedisClient = createClient({ url: process.env.REDIS_URL });
+const isProduction = process.env.NODE_ENV === 'production';
+
 async function bootstrap() {
+  await RedisClient.connect();
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
@@ -22,8 +29,15 @@ async function bootstrap() {
       cookie: {
         maxAge: 1000 * 60 * 60 * 24, // 24 hours
         httpOnly: false,
-        secure: process.env.NODE_ENV === 'production',
+        secure: isProduction,
       },
+      store: isProduction
+        ? new RedisStore({
+            client: RedisClient,
+            prefix: 'chatbot.estimate',
+            ttl: 24 * 60 * 60, // 24 hours
+          })
+        : undefined,
     }),
   );
 
