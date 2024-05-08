@@ -3,10 +3,10 @@ import React, { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import clsx from 'clsx';
 
-interface ToastProps {
+type ToastProps = {
   type: 'success' | 'warn' | 'error' | 'info';
   message: string;
-}
+};
 
 const Toast: React.FC<ToastProps> = ({ type, message }) => {
   const container = useRef<HTMLElement>();

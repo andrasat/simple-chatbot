@@ -5,12 +5,12 @@ import clsx from 'clsx';
 import { noto } from '@lib/fonts';
 import { Message } from '@lib/types';
 
-type Props = {
+type MessageBlockProps = {
   message: Message;
   name: string;
 };
 
-function MessageBlock({ message, name }: Props) {
+function MessageBlock({ message, name }: MessageBlockProps) {
   const sanitizedInnerHTML = { __html: DOMPurify.sanitize(message.content) };
   switch (message.role) {
     case 'user':

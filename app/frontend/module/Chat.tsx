@@ -2,31 +2,35 @@
 import { useState, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 
-import TextAreaInput from '@components/TextAreaInput';
+import ChatInput from '@components/ChatInput';
+import FileUploadButton from '@components/FileUploadButton';
 import SubmitButton from '@components/SubmitButton';
 import MessageBlock from '@components/MessageBlock';
 
 import { getWelcomeMsgStream, chatAI } from '@lib/api';
+import pdfToText from '@lib/pdfToText';
 import { Message } from '@lib/types';
 
-type Props = {
+type ChatProps = {
   locale: string;
   dictionary: {
     text: { title: string; enter: string; user: string; assistant: string };
-    error: { 'input-message-empty': string };
+    error: { 'input-message-empty': string; 'file-type-pdf': string };
     placeholder: { 'input-message': string };
   };
 };
 
-function Chat({ locale, dictionary }: Props) {
+function Chat({ locale, dictionary }: ChatProps) {
   const [error, setError] = useState('');
+  const [filename, setFilename] = useState('');
   const [disableInput, setDisableInput] = useState(false);
   const [conversation, setConversation] = useState<Message[]>([]);
 
   const didInit = useRef(false);
+  const documentText = useRef('');
   const buttonRef = useRef<HTMLButtonElement>(null);
   const conversationRef = useRef<HTMLDivElement>(null);
-  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const chatInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     async function fetchWelcomeMessage() {
@@ -67,19 +71,31 @@ function Chat({ locale, dictionary }: Props) {
     if (!userMessage) {
       setError(dictionary.error['input-message-empty']);
       return;
+    } else {
+      setError('');
     }
+
+    const userMessageForDisplay =
+      userMessage + (filename ? `\nFile: (${filename})` : '');
+    const userMessageForAPI =
+      userMessage +
+      (documentText.current ? `\n<document>\n${filename}\n</document>` : '');
 
     setConversation((prevConversation) => [
       ...prevConversation,
       {
         role: 'user',
-        content: userMessage,
+        content: userMessageForDisplay,
       },
     ]);
 
-    textAreaRef.current!.value = '';
+    setFilename('');
+    documentText.current = '';
 
-    const chunks = chatAI({ userMessage, prevAIMessage }, locale);
+    const chunks = chatAI(
+      { userMessage: userMessageForAPI, prevAIMessage },
+      locale,
+    );
     setDisableInput(true);
 
     let newMessage = '';
@@ -107,12 +123,37 @@ function Chat({ locale, dictionary }: Props) {
     setDisableInput(false);
   }
 
-  const inputOnKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    // overwrite enter behaviour in text area
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      buttonRef.current?.click();
+  const handleInputOnChange = (value: string) => {
+    if (value) {
+      setError('');
     }
+  };
+
+  const handleFileUpload = async (file: File) => {
+    if (file.type !== 'application/pdf') {
+      setError(dictionary.error['file-type-pdf']);
+      return;
+    } else {
+      setError('');
+    }
+
+    const data = await file.arrayBuffer();
+    const text = await pdfToText(data);
+    setFilename(file.name);
+    documentText.current = text;
+  };
+
+  const handleEnterKey = (e: React.KeyboardEvent<HTMLSpanElement>) => {
+    e.preventDefault();
+    buttonRef.current?.click();
+  };
+
+  const removeCurrentDocument = () => {
+    setError('');
+    setFilename('');
+    chatInputRef.current!.value = '';
+    chatInputRef.current!.nextSibling!.textContent = '';
+    documentText.current = '';
   };
 
   return (
@@ -120,7 +161,8 @@ function Chat({ locale, dictionary }: Props) {
       className={clsx(
         'flex',
         'flex-col',
-        'py-10',
+        'pt-10',
+        'pb-3',
         'px-4',
         'w-full',
         'h-screen',
@@ -145,27 +187,80 @@ function Chat({ locale, dictionary }: Props) {
           />
         ))}
       </div>
-      <form onSubmit={handleSubmit} className={clsx('flex', 'flex-shrink')}>
-        <TextAreaInput
-          ref={textAreaRef}
-          name="userMessage"
-          placeholder={dictionary.placeholder['input-message']}
-          disable={disableInput}
-          className={clsx('flex-auto')}
-          onKeyDown={inputOnKeyDown}
-        />
-        <SubmitButton
-          id="submit-button"
-          type="submit"
-          ref={buttonRef}
-          className={clsx('flex-initial')}
-        >
-          {dictionary.text['enter']}
-        </SubmitButton>
+      <form onSubmit={handleSubmit}>
+        <div className={clsx('flex', 'min-h-[60px]')}>
+          <div
+            className={clsx(
+              'flex-auto',
+              'border',
+              'border-r-0',
+              'border-gray-900',
+              'rounded-l-lg',
+            )}
+          >
+            <ChatInput
+              ref={chatInputRef}
+              name="userMessage"
+              placeholder={dictionary.placeholder['input-message']}
+              disable={disableInput}
+              onChange={handleInputOnChange}
+              onEnter={handleEnterKey}
+              className={clsx('w-full', 'h-[20px]', 'mt-2', 'ml-3')}
+            />
+            <div className={clsx('flex', 'items-center', 'px-2', 'py-1')}>
+              <FileUploadButton
+                onFileUpload={handleFileUpload}
+                className={clsx(
+                  'inline-flex',
+                  'flex-col',
+                  'items-center',
+                  'justify-center',
+                  'min-w-[20px]',
+                  'min-h-[30px]',
+                  'mr-2',
+                )}
+              />
+              <span className="text-xs font-light">
+                {filename ? (
+                  <>
+                    {filename}
+                    &nbsp;
+                    <span
+                      className="cursor-pointer"
+                      onClick={removeCurrentDocument}
+                    >
+                      <i className="fa-light fa-xmark text-sm"></i>
+                    </span>
+                  </>
+                ) : (
+                  ''
+                )}
+              </span>
+            </div>
+          </div>
+          <SubmitButton
+            id="submit-button"
+            type="submit"
+            ref={buttonRef}
+            className={clsx(
+              'flex-[0_1_50px]',
+              'border-l-0',
+              'border-r-[1px]',
+              'border-t-[1px]',
+              'border-b-[1px]',
+              'border-gray-900',
+              'rounded-r-lg',
+            )}
+          >
+            <i className="fa-solid fa-paper-plane"></i>
+          </SubmitButton>
+        </div>
       </form>
-      {error && (
-        <div className={clsx('text-red-500', 'text-sm', 'py-2')}>{error}</div>
-      )}
+      <div
+        className={clsx('text-red-500', 'text-sm', 'px-3', 'pt-1', 'h-[24px]')}
+      >
+        {error}
+      </div>
     </div>
   );
 }

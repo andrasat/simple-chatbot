@@ -6,7 +6,8 @@
     "assistant": "AI"
   },
   "error": {
-    "input-message-empty": "Please enter a message"
+    "input-message-empty": "Please enter a message",
+    "file-type-pdf": "Please upload a PDF file"
   },
   "placeholder": {
     "input-message": "Type your message..."

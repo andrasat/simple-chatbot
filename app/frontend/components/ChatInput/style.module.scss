@@ -1,0 +1,5 @@
+.chatInputContent:empty::before {
+  content: attr(data-placeholder);
+  pointer-events: none;
+  display: block;
+}

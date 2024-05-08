@@ -6,7 +6,8 @@
     "assistant": "AI"
   },
   "error": {
-    "input-message-empty": "メッセージを入力してください"
+    "input-message-empty": "メッセージを入力してください",
+    "file-type-pdf": "PDF ファイルを選択してください"
   },
   "placeholder": {
     "input-message": "メッセージを入力してください"

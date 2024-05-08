@@ -2,13 +2,13 @@ import React from 'react';
 import { noto } from '@lib/fonts';
 import clsx from 'clsx';
 
-interface SubmitButtonProps {
+type SubmitButtonProps = {
   children: React.ReactNode;
   onClick?: () => void;
   id?: string;
   type?: 'button' | 'submit' | 'reset' | undefined;
   className?: string;
-}
+};
 
 const SubmitButton = React.forwardRef<HTMLButtonElement, SubmitButtonProps>(
   ({ children, onClick, id, type, className }, ref) => {
@@ -19,12 +19,10 @@ const SubmitButton = React.forwardRef<HTMLButtonElement, SubmitButtonProps>(
         onClick={onClick}
         ref={ref}
         className={clsx(
-          'bg-blue-500',
-          'hover:bg-blue-600',
-          'text-white',
-          'px-4',
-          'py-2',
-          'rounded-r-lg',
+          'bg-black',
+          'hover:bg-gray-900',
+          'text-gray-300',
+          'text-sm',
           noto.className,
           className,
         )}
