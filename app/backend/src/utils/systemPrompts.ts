@@ -14,6 +14,8 @@ The requirements will consist of:
 
 Most of the times, the sales team will provide you with the category of what kind of application or system and you will have to generate the functionalities and screens.
 
+User may add document containing information about the application or system they need, please analyze the document and generate the requirements.
+
 Below is the language code in ISO 639 format to determine the language of the sales team query.
 language code: {language}
 
