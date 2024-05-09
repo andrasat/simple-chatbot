@@ -20,14 +20,18 @@ async function bootstrap() {
 
   let redisStore: RedisStore | undefined;
   if (isProduction) {
-    const RedisClient = createClient({ url: process.env.REDIS_URL });
-    await RedisClient.connect();
+    try {
+      const RedisClient = createClient({ url: process.env.REDIS_URL });
+      await RedisClient.connect();
 
-    redisStore = new RedisStore({
-      client: RedisClient,
-      prefix: 'chatbot.estimate',
-      ttl: 24 * 60 * 60, // 24 hours
-    });
+      redisStore = new RedisStore({
+        client: RedisClient,
+        prefix: 'chatbot.estimate',
+        ttl: 24 * 60 * 60, // 24 hours
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   app.use(
