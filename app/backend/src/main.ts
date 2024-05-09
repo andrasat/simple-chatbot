@@ -21,7 +21,10 @@ async function bootstrap() {
   let redisStore: RedisStore | undefined;
   if (isProduction) {
     try {
-      const RedisClient = createClient({ url: process.env.REDIS_URL });
+      const RedisClient = createClient({
+        url: process.env.REDIS_URL,
+        socket: { family: 6 },
+      });
       await RedisClient.connect();
 
       redisStore = new RedisStore({
