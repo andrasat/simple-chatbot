@@ -31,10 +31,9 @@
     "@nestjs/platform-express": "^10.0.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
-    "connect-redis": "^7.1.1",
     "express-session": "^1.18.0",
     "langchain": "^0.1.34",
-    "redis": "^4.6.13",
+    "memorystore": "^1.6.7",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1"
   },

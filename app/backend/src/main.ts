@@ -1,12 +1,13 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
-import * as Session from 'express-session';
-import RedisStore from 'connect-redis';
-import { createClient } from 'redis';
+import Session from 'express-session';
+import createMemoryStore from 'memorystore';
+const MemoryStore = createMemoryStore(Session);
 
 import { AppModule } from './app.module';
 
 const isProduction = process.env.NODE_ENV === 'production';
+const cookieAge = 1000 * 60 * 60 * 24; // 24 hours
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -18,25 +19,6 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
 
-  let redisStore: RedisStore | undefined;
-  if (isProduction) {
-    try {
-      const RedisClient = createClient({
-        url: process.env.REDIS_URL,
-        socket: { family: 6 },
-      });
-      await RedisClient.connect();
-
-      redisStore = new RedisStore({
-        client: RedisClient,
-        prefix: 'chatbot.estimate',
-        ttl: 24 * 60 * 60, // 24 hours
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   app.use(
     Session({
       name: 'chatbot.estimate.sid',
@@ -44,11 +26,11 @@ async function bootstrap() {
       resave: false,
       saveUninitialized: true,
       cookie: {
-        maxAge: 1000 * 60 * 60 * 24, // 24 hours
+        maxAge: cookieAge,
         httpOnly: false,
         secure: isProduction,
       },
-      store: redisStore,
+      store: new MemoryStore({ checkPeriod: cookieAge }),
     }),
   );
 
