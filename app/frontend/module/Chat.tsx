@@ -79,7 +79,9 @@ function Chat({ locale, dictionary }: ChatProps) {
       userMessage + (filename ? `\nFile: (${filename})` : '');
     const userMessageForAPI =
       userMessage +
-      (documentText.current ? `\n<document>\n${filename}\n</document>` : '');
+      (documentText.current
+        ? `\n<document>\n${documentText.current}\n</document>`
+        : '');
 
     setConversation((prevConversation) => [
       ...prevConversation,
