@@ -52,6 +52,7 @@ const FileUploadButton = forwardRef<HTMLSpanElement, FileUploadButtonProps>(
             type="file"
             className="hidden"
             onChange={handleFileInputChange}
+            onClick={(e) => (e.currentTarget.value = '')}
           />
         </label>
       </span>
