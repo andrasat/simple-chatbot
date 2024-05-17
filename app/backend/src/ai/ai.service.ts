@@ -94,12 +94,12 @@ export class AiService {
 
     if (this.histories[sessionId]) {
       history = this.histories[sessionId];
-
-      if (input.prevAIMessage) await history.addAIMessage(input.prevAIMessage);
     } else {
       history = new InMemoryChatMessageHistory([
         new SystemMessage(REQUIREMENT_GENERATOR_SYSTEM_PROMPT),
       ]);
+
+      this.histories[sessionId] = history;
     }
 
     const chain = prompts.pipe(chatModel);

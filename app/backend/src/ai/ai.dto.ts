@@ -4,7 +4,4 @@ export class ChatInput {
   @IsNotEmpty()
   @IsString()
   readonly userMessage: string;
-
-  @IsString()
-  readonly prevAIMessage?: string;
 }
