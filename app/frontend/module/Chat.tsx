@@ -60,11 +60,6 @@ function Chat({ locale, dictionary }: ChatProps) {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    const isStart = conversation.length === 1;
-    const prevAIMessage = isStart
-      ? ''
-      : conversation[conversation.length - 1]?.content;
-
     const formData = new FormData(e.currentTarget);
     const userMessage = formData.get('userMessage') as string;
 
@@ -95,7 +90,7 @@ function Chat({ locale, dictionary }: ChatProps) {
     documentText.current = '';
 
     const chunks = chatAI(
-      { userMessage: userMessageForAPI, prevAIMessage },
+      { userMessage: userMessageForAPI },
       locale,
     );
     setDisableInput(true);

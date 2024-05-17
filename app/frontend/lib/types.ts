@@ -5,7 +5,6 @@ export type Message = {
 
 export type ChatInput = {
   userMessage: string;
-  prevAIMessage?: string;
 };
 
 export interface CallbackManager {
